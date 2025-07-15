@@ -3,6 +3,9 @@ import swagger from '@elysiajs/swagger';
 import { Elysia } from 'elysia';
 import { auth } from '@/lib/auth';
 
+// FIXME: implement the better auth api
+// const swag = await auth.api.generateOpenAPISchema();
+
 const app = new Elysia()
 	.use(
 		swagger({
