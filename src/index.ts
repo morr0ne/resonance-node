@@ -1,8 +1,24 @@
 import { cors } from '@elysiajs/cors';
+import swagger from '@elysiajs/swagger';
 import { Elysia } from 'elysia';
 import { auth } from '@/lib/auth';
 
 const app = new Elysia()
+	.use(
+		swagger({
+			path: '/docs',
+			documentation: {
+				info: {
+					title: 'Resonance Documentation',
+					version: '0.0.1',
+					license: {
+						name: "'EUPL-1.2'",
+						url: 'https://eupl.eu/',
+					},
+				},
+			},
+		}),
+	)
 	.use(
 		cors({
 			origin: 'http://localhost:4321',
@@ -12,6 +28,7 @@ const app = new Elysia()
 		}),
 	)
 	.mount(auth.handler)
+	.post('/hello', () => 'world')
 	.listen(3000);
 
 console.log(
